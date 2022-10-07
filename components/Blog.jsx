@@ -19,9 +19,9 @@ export const Blog = ({title,content,username,id,category,createdAt}) => {
       <Card.Subtitle className="mt-1 mb-1" style={{ color: "grey" }}>
       {formatDistanceToNow(new Date(createdAt),{addSuffix:true})}
       </Card.Subtitle>
-      <Card.Subtitle className='my-1'>by @{username}</Card.Subtitle>
+      <Card.Subtitle className='my-1'>by @{username}</Card.Subtitle>HV
       <Card.Text
-        className="p-1 px-2"
+        className="blog-category p-1 px-2"
         style={{
           border: "1px solid #B53471",
           width: "fit-content",
