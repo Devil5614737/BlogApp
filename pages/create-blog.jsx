@@ -51,7 +51,7 @@ export default function CreateBlog() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {["Programming", "Politics", "Fashion"].map((item) => (
+            {["Programming", "Politics", "Fashion","Other"].map((item) => (
               <Dropdown.Item
                 onClick={() => setCategory(item)}
                 href="#!"

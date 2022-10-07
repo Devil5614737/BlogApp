@@ -56,7 +56,7 @@ const handleEdit=async()=>{
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-       { ["Programming","Politics","Fashion"].map(item=>
+       { ["Programming","Politics","Fashion","Other"].map(item=>
         <Dropdown.Item onClick={()=>setCategory(item)} href="#!" key={item}>{item}</Dropdown.Item>
         )}
       </Dropdown.Menu>
