@@ -5,7 +5,7 @@ import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import { useContext, useState } from "react";
-import { Button, Dropdown, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Dropdown, FloatingLabel, Form, Spinner } from "react-bootstrap";
 import {request} from '../api/request';
 import { useRouter } from "next/router";
 import { BlogContext } from "../context/BlogContext";
@@ -17,6 +17,7 @@ export default function CreateBlog() {
   const[title,setTitle]=useState(blog?.title);
   const[subTitle,setSubtitle]=useState(blog?.subtitle);
   const[category,setCategory]=useState(blog?.category);
+  const[loading,setLoading]=useState(false)
 
 
   const mdParser = new MarkdownIt();
@@ -29,19 +30,17 @@ export default function CreateBlog() {
 
 
 
-const uploadPost=async()=>{
-  if(!category) return alert('select a category')
-  if(!title) return alert('title should not be empty')
-  if(!subTitle) return alert('subtitle should not be empty')
-    const res=await request.post('/create-blog',{title,content:text,image:"",category,subtitle:subTitle});
-    if(res.status===200) return router.push('/blogs')
-}
+
 
 
 const handleEdit=async()=>{
+  setLoading(true)
     const res=await request.put('/edit',{blogId:blog._id, title,subtitle:subTitle, content:text, category });
      if(res.status===200){
-        return router.push('/blogs')
+      setLoading(false)
+         router.push('/blogs')
+
+
      }
 }
 
@@ -91,7 +90,10 @@ const handleEdit=async()=>{
           placeholder='content'
           allowPasteImage
         />
-        <Button onClick={handleEdit} variant="outline-dark" className='w-100 my-4'>Edit</Button>
+        <Button onClick={handleEdit} variant="outline-dark" className='w-100 my-4'>{
+        loading?  <Spinner style={{width:18,height:18}} animation="border"/>:
+        "Edit"
+        }</Button>
       </Container>
     </>
   );

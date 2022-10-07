@@ -18,7 +18,7 @@ const NavComp = () => {
     <Container>
       <div className="d-flex justify-content-between align-items-center">
       <Link href='/blogs'>
-      <p style={{ fontWeight: "bold", fontSize: 20, cursor: "pointer" }}>
+      <p style={{ fontWeight: "bold", fontSize: 20, cursor: "pointer" ,color:'#B53471'}}>
           BlogIt
         </p></Link>
         {currentUser ? (

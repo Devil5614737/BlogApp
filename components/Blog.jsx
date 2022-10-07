@@ -23,7 +23,7 @@ export const Blog = ({title,content,username,id,category,createdAt}) => {
       <Card.Text
         className="p-1 px-2"
         style={{
-          border: "1px solid black",
+          border: "1px solid #B53471",
           width: "fit-content",
           borderRadius: 5,
         }}

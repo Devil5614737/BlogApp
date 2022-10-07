@@ -4,20 +4,23 @@ import Container from "../components/Container";
 import MyBlog from "../components/MyBlog";
 import NavComp from "../components/NavComp";
 import { request } from "../api/request";
-import { useRouter } from "next/router";
-import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
+
 
 
 const MyBlogs = () => {
 
-  const { currentUser } = useContext(AuthContext);
+
   const [fetch, setFetch] = useState(false);
   const [myBlogs, setMyBlogs] = useState([]);
+  const[loading,setLoading]=useState(false)
 
   const getBlogs = async () => {
+    setLoading(true)
     const { data } = await request.get("/myblog");
     setMyBlogs(data);
+    if(data){
+      setLoading(false)
+    }
   };
 
   const handleDeleteBlog = async (id) => {
@@ -30,13 +33,17 @@ const MyBlogs = () => {
     return () => setFetch(false);
   }, [fetch]);
 
+useEffect(()=>{
+  getBlogs()
+},[])
+
   return (
     <>
       <NavComp />
       <Container>
         <div className="my-5">
           {myBlogs?.map((item) => (
-            <MyBlog key={item._id} deleteBlog={handleDeleteBlog} item={item} />
+            <MyBlog key={item._id} deleteBlog={handleDeleteBlog} item={item} loading={loading}/>
           ))}
         </div>
       </Container>

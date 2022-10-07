@@ -3,7 +3,7 @@ import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
-import { Button, Card, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Card, FloatingLabel, Form, Spinner } from "react-bootstrap";
 import { toast, Toaster } from "react-hot-toast";
 import { request } from "../api/request";
 import { AuthContext } from "../context/AuthContext";
@@ -14,19 +14,23 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const[loading,setLoading]=useState(false)
 
   const handleSignup = () => {
+    setLoading(true)
     request
       .post("http://localhost:4000/api/signup", { username, email, password,displayPic:username })
       .then((res) => {
         if (res.data) {
+          setLoading(false)
           toast.success(" created");
           router.push("/");
         }
       })
       .catch((e) => {
-       
-        if (e) return toast.error(e.response.data);
+        if (e) {
+          setLoading(false)
+           toast.error(e?.response.data)};
       });
   };
 
@@ -82,7 +86,7 @@ const Signup = () => {
               variant="outline-dark"
               onClick={handleSignup}
             >
-              Signup
+              {loading?<Spinner style={{width:18,height:18}} animation="border"/>:"Signup"}
             </Button>
           </Card.Body>
         </Card>

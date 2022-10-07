@@ -2,7 +2,7 @@ import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
-import { Button, Card, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Card, FloatingLabel, Form, Spinner } from "react-bootstrap";
 import { toast, Toaster } from "react-hot-toast";
 import { request } from "../api/request";
 import { AuthContext } from "../context/AuthContext";
@@ -12,12 +12,15 @@ const Login = () => {
   const { setCurrentUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    setLoading(true)
     const res = await request
       .post("/login", { email, password })
       .then((res) => {
         if (res.data) {
+          setLoading(false)
           localStorage.setItem("token", res.data);
           const decoded = jwtDecode(res.data);
           setCurrentUser(decoded);
@@ -25,6 +28,7 @@ const Login = () => {
         }
       })
       .catch((e) => {
+        setLoading(false)
         if (e) return toast.error("invalid credentials");
       });
   };
@@ -69,7 +73,7 @@ const Login = () => {
               variant="outline-dark"
               onClick={handleLogin}
             >
-              Login
+              {loading?<Spinner style={{width:18,height:18}} animation="border"/>:"Login"}
             </Button>
           </Card.Body>
         </Card>
