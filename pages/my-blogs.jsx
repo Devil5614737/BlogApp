@@ -24,7 +24,7 @@ const MyBlogs = () => {
   };
 
   const handleDeleteBlog = async (id) => {
-    setFetch(true);
+
     await request.post("/remove-blog", { blogId: id });
   };
 
