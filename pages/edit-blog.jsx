@@ -14,9 +14,9 @@ export default function CreateBlog() {
   const router=useRouter();
   const { blog } = useContext(BlogContext);
   const [text, setText] = useState();
-  const[title,setTitle]=useState(blog.title);
-  const[subTitle,setSubtitle]=useState(blog.subtitle);
-  const[category,setCategory]=useState(blog.category);
+  const[title,setTitle]=useState(blog?.title);
+  const[subTitle,setSubtitle]=useState(blog?.subtitle);
+  const[category,setCategory]=useState(blog?.category);
 
 
   const mdParser = new MarkdownIt();

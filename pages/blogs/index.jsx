@@ -21,7 +21,10 @@ const Blogs = ({ data }) => {
   });
 
   useEffect(() => {
-    toast.success(`welcome @${currentUser?.username}`);
+    if(currentUser){
+      toast.success(`welcome @${currentUser?.username}`);
+
+    }
   }, [currentUser?.username]);
 
   return (
