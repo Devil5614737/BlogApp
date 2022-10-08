@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import Container from "../components/Container";
-import MyBlog from "../components/MyBlog";
-import NavComp from "../components/NavComp";
-import { request } from "../api/request";
+import Container from "../../components/Container";
+import MyBlog from "../../components/MyBlog";
+import NavComp from "../../components/NavComp";
+import { request } from "../../api/request";
 
 
 
@@ -23,8 +23,10 @@ const MyBlogs = () => {
     }
   };
 
-  const handleDeleteBlog = async (id) => {
 
+
+  const handleDeleteBlog = async (id) => {
+setFetch(true)
     await request.post("/remove-blog", { blogId: id });
   };
 
@@ -34,9 +36,7 @@ const MyBlogs = () => {
   }, [fetch]);
 
   
-useEffect(()=>{
-  getBlogs()
-},[])
+
 
   return (
     <>
