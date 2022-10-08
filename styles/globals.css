@@ -51,8 +51,10 @@ img{
 @media screen and (max-width:600px){
   .blog-title{
    font-size: 26px !important;
-
   }
+blog-category{
+font-size:14px;
+}
 }
 
 pre{
