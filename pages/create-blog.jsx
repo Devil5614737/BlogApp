@@ -5,7 +5,13 @@ import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import { useState } from "react";
-import { Button, Dropdown, FloatingLabel, Form, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Dropdown,
+  FloatingLabel,
+  Form,
+  Spinner,
+} from "react-bootstrap";
 import { request } from "../api/request";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
@@ -29,6 +35,7 @@ export default function CreateBlog() {
     if (!category) return toast.error("select a category");
     if (!title) return toast.error("title should not be empty");
     if (!subTitle) return toast.error("subtitle should not be empty");
+
     const res = await request.post("/create-blog", {
       title,
       content: text,
@@ -36,9 +43,10 @@ export default function CreateBlog() {
       category,
       subtitle: subTitle,
     });
-    if (res.status === 200)  {
-      setLoading(false)
-      router.push("/blogs")};
+    if (res.status === 200) {
+      setLoading(false);
+      router.push("/blogs");
+    }
   };
 
   return (
@@ -51,7 +59,7 @@ export default function CreateBlog() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {["Programming", "Politics", "Fashion","Other"].map((item) => (
+            {["Programming", "Politics", "Fashion", "Other"].map((item) => (
               <Dropdown.Item
                 onClick={() => setCategory(item)}
                 href="#!"
@@ -99,7 +107,11 @@ export default function CreateBlog() {
           variant="outline-dark"
           className="w-100 my-4"
         >
-          {loading?<Spinner style={{width:18,height:18}} animation="border"/>:"Post"}
+          {loading ? (
+            <Spinner style={{ width: 18, height: 18 }} animation="border" />
+          ) : (
+            "Post"
+          )}
         </Button>
       </Container>
       <Toaster

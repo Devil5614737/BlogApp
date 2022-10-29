@@ -12,6 +12,7 @@ const NavComp = () => {
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem("token");
+  
   };
 
   return (

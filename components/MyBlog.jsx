@@ -1,15 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
-import { Button, Card, Placeholder } from "react-bootstrap";
+import { Button, Card, Placeholder, Spinner } from "react-bootstrap";
 import { BlogContext } from "../context/BlogContext";
 
 const MyBlog = ({ item, deleteBlog, loading }) => {
   const router = useRouter();
   const { setBlog } = useContext(BlogContext);
   return loading ? (
-    <Placeholder as="div" animation="wave">
-      <Placeholder xs={12} style={{ height: 190 }} />
-    </Placeholder>
+    <Spinner style={{width:18,height:18}} animation="border"/>
   ) : (
     <Card className="border-0 mb-5">
       <Card.Title style={{ fontWeight: "bold", fontSize: 22 }}>

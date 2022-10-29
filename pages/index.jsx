@@ -24,7 +24,7 @@ const Login = () => {
           localStorage.setItem("token", res.data);
           const decoded = jwtDecode(res.data);
           setCurrentUser(decoded);
-          router.push("/blogs");
+          window.location='/blogs'
         }
       })
       .catch((e) => {
